@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "How to graphwl backend ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lesleyfon/How-to-graphql.git"
+  },
+  "author": "Lesley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lesleyfon/How-to-graphql/issues"
+  },
+  "homepage": "https://github.com/lesleyfon/How-to-graphql#readme",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3"
+  }
+}
