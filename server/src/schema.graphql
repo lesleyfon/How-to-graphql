@@ -12,4 +12,5 @@
 
     type Mutation {
         postLink ( description: String!, url: String!): Link!
+        updateLink (id: ID!, description: String, url: String): Link
     }

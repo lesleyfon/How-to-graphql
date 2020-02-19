@@ -18,7 +18,7 @@ const resolvers = {
     Link: (parent, args, content) => ({
         id: parent.id,
         description: parent.description,
-        url: parent
+        url: parent.url
     }),
     Mutation: {
         postLink: (parent, args, content) => {
@@ -29,6 +29,16 @@ const resolvers = {
             }
             links.push(link);
            return link;
+        },
+        updateLink: (parent, args)=>{
+            let u = args;
+            links = links.map(link => {
+                if(link.id === u.id){
+                    link = u
+                }
+                return link
+            })
+            return u
         }
     }
 };
