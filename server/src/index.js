@@ -8,11 +8,11 @@ let links = [{
 }]
 let idCount = links.length;
   
-
 const resolvers = {
     Query: {
         info: () =>`This is the API of a Hackernews clone`,
-        feed: () => links
+        feed: () => links,
+        link: (parent, args) => links.find(l => l.id === args.id)
     },
 
     Link: (parent, args, content) => ({
