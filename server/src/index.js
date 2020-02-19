@@ -39,6 +39,9 @@ const resolvers = {
                 return link
             })
             return u
+        },
+        deleteLink: (parent, args) =>{
+            return links.filter(linkToDelete => linkToDelete.id !== args.id)
         }
     }
 };
