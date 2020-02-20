@@ -41,7 +41,13 @@ const resolvers = {
             return u
         },
         deleteLink: (parent, args) =>{
-            return links.filter(linkToDelete => linkToDelete.id !== args.id)
+            const linkId = args.id 
+            console.log(args)
+            links = links.filter(linkToDelete => linkToDelete.id !== args.id)
+            return  {
+                ...args,
+                description: `Link at ${linkId} has been deleted`
+            }
         }
     }
 };
