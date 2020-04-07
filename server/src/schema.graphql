@@ -1,17 +1,58 @@
- type Query {
-        info: String!
-        feed: [Link!]!
-        link(id: ID!): Link
-    }
-    
-    type Link {
-        id: ID!,
-        description: String!
-        url: String!
-    }
+type Query {
+  info: String!
+  feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
+  link(id: ID!): Link
+}
+type Feed{
+     links: [Link!]!
+    count: Int!
+}
 
-    type Mutation {
-        postLink ( description: String!, url: String!): Link!
-        updateLink (id: ID!, description: String, url: String): Link
-        deleteLink (id: ID!) : Link
-    }
+type Link {
+  id: ID!
+  description: String!
+  url: String!
+  postedBy: User
+  votes: [Vote!]!
+}
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  links: [Link!]!
+}
+
+type AuthPayLoad {
+  token: String
+  user: User
+}
+
+type Vote {
+  id: ID!
+  link: Link!
+  user: User!
+}
+
+type Mutation {
+  postLink(description: String!, url: String!): Link!
+  updateLink(id: ID!, description: String, url: String): Link
+  deleteLink(id: ID!): Link
+  signup(email: String!, name: String!, password: String!): AuthPayLoad
+  login(email: String!, password: String!): AuthPayLoad
+  vote(linkId: ID!): Vote
+}
+
+type Subscription {
+  newLink: Link
+  newVote: Vote
+}
+
+enum LinkOrderByInput {
+  description_ASC
+  description_DESC
+  url_ASC
+  url_DESC
+  createdAt_ASC
+  createdAt_DESC
+}

@@ -1,60 +1,31 @@
 const { GraphQLServer } = require('graphql-yoga');
-
-
-let links = [{
-    id: 'link-0',
-    url: 'www.howtographql.com',
-    description: 'Fullstack tutorial for GraphQL'
-}]
-let idCount = links.length;
-  
+const { prisma } = require('./generated/prisma-client')
+const { Query} = require('./resolvers/Query');
+const Link = require('./resolvers/Link');
+const User = require('./resolvers/User')
+const { Mutations} = require('./resolvers/Mutation')
+const Subscription = require('./resolvers/Subscription');
+const Vote = require('./resolvers/Vote')
 const resolvers = {
-    Query: {
-        info: () =>`This is the API of a Hackernews clone`,
-        feed: () => links,
-        link: (parent, args) => links.find(l => l.id === args.id)
-    },
+    Query: Query,
+    Link,
+    User,
+    Mutation: Mutations,
+    Subscription,
+    Vote
 
-    Link: (parent, args, content) => ({
-        id: parent.id,
-        description: parent.description,
-        url: parent.url
-    }),
-    Mutation: {
-        postLink: (parent, args, content) => {
-            let link = {
-                id: `link-${idCount++}`,
-                url: args.url,
-                description: args.description
-            }
-            links.push(link);
-           return link;
-        },
-        updateLink: (parent, args)=>{
-            let u = args;
-            links = links.map(link => {
-                if(link.id === u.id){
-                    link = u
-                }
-                return link
-            })
-            return u
-        },
-        deleteLink: (parent, args) =>{
-            const linkId = args.id 
-            console.log(args)
-            links = links.filter(linkToDelete => linkToDelete.id !== args.id)
-            return  {
-                ...args,
-                description: `Link at ${linkId} has been deleted`
-            }
-        }
-    }
 };
+
 
 const server = new GraphQLServer({
     typeDefs: './src/schema.graphql',
     resolvers,
+    context: request => {
+        return{
+            ...request,
+            prisma
+        }
+    }
 });
 
 server.start(()=> console.log(`Server is running on http://localhost:4000`))
