@@ -1,0 +1,16 @@
+#3Type Definition for describing our schema. Also note that the exclamation sign after the string means it can't be null
+
+type Query {
+  info: String!
+  feed: [Link!]!
+}
+
+type Link {
+  id: ID!
+  url: String!
+  description: String!
+}
+
+type Mutation {
+  post(url: String, description: String): Link!
+}

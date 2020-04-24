@@ -8,7 +8,6 @@ const typeDefs = `
     type Query{
         info: String!
         feed: [Link!]!
-        link(): Link
     }
     type Link{
         id: ID!
@@ -28,7 +27,7 @@ let links = [
 const resolvers = {
   Query: {
     info: () => "Hello, Welcome to graphql",
-    feed: () => links,
+    feed: () => links
   },
 
   Link: {
