@@ -1,35 +1,39 @@
 const { GraphQLServer } = require("graphql-yoga");
 const { prisma } = require("./generated/prisma-client");
-const Query = require('./resolvers/Query');
+const { feed } = require("./resolvers/Query");
+const { post, signUp, login } = require("./resolvers/Mutation");
+const {links} = require("./resolvers/User");
+const { postedBy } = require("./resolvers/Link");
 
 /**
  * This is the implementation of the schema definition. Resolvers are where we implement our type definitions
  */
 const resolvers = {
-
-
+  Query: {
+    feed,
+  },
   Mutation: {
-    post: (parent, args, context) =>
-      context.prisma.createLink({
-        url: args.url,
-        description: args.description,
-      }),
-
-    updateLink: (parent, args) => {
-      return args;
-    },
+    post,
+    signUp,
+    login
+  },
+  User: {
+    links
+  },
+  Link: {
+    postedBy
   },
 };
-
 /**
  * Finally we pass the typedef and the resolve into a new instance of Graphqlserver to start our server which then execute the resolver
  */
 const server = new GraphQLServer({
   typeDefs: "./src/schema.graphql",
   resolvers,
-  context: {
-    prisma,
-  },
+  context: (request) => ( {
+      ...request,
+      prisma,
+    })
 });
 
 server.start(() => console.log(`Server is running on http://localhost:4000`));

@@ -1,6 +1,7 @@
 class Query {
 
     feed(parent, args, context){
+        
         return context.prisma.links();
     }
     
