@@ -1,22 +1,12 @@
 const { GraphQLServer } = require("graphql-yoga");
 const { prisma } = require("./generated/prisma-client");
+const Query = require('./resolvers/Query');
 
 /**
  * This is the implementation of the schema definition. Resolvers are where we implement our type definitions
  */
 const resolvers = {
-  Query: {
-    info: (parent, args, context)=> {
-      console.log(context);
-      return "Hello, Welcome to graphql"
-    },
-    feed: (parent, args, context) => {
-      
-      return context.prisma.links();
-    },
 
-    link: () => {},
-  },
 
   Mutation: {
     post: (parent, args, context) =>
