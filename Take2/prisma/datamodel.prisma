@@ -4,6 +4,7 @@ type Link {
   description: String!
   url: String!
   postedBy: User
+  votes: [Vote!]!
   
 }
 
@@ -14,4 +15,12 @@ type User {
   number: Int
   password: String!
   links: [Link!]!
+  votes: [Vote!]!
+}
+
+
+type Vote {
+  id: ID! @id
+  user: User!
+  link: Link!
 }
