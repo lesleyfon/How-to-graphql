@@ -7,7 +7,7 @@ function link(root, args, context){
 function user(root, args, context){
     return context.prisma.vote({
         id: root.id
-    })
+    }).user()
 }
 
 

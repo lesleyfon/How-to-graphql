@@ -54,16 +54,16 @@ class Mutation {
     const userId = getUserId(context);
 
     const vote = await context.prisma.$exists.vote({
-      link: { id: args.linkId },
       user: { id: userId },
+      link: { id: args.linkId },
     });
 
     if (vote)
       throw new Error(`Link with the ID ${args.linkId} has already been voted on`);
 
     return context.prisma.createVote({
-      user: { connect: { id: userId } },
       link: { connect: { id: args.linkId } },
+      user: { connect: { id: userId } },
     });
   }
 }
