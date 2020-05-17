@@ -9,18 +9,13 @@ function newVoteSubscription(root, args, context) {
 
 const newLink = {
   subscribe: newLinkSubscribe,
-  resolve: (payload) => {
-    console.log(payload);
-    return payload;
-  },
+  resolve: (payload) => payload,
 };
 
 const newVote= {
   subscribe: newVoteSubscription,
-  resolve: payload => {
-    console.log(payload)
-    return payload
-  }
+  resolve: payload => payload
+
 }
 
 module.exports = {
