@@ -2,7 +2,7 @@
 
 type Query {
   info: String!
-  feed: [Link!]!
+  feed(filter: String): [Link!]!
   link(id: ID!): Link!
 }
 
@@ -27,9 +27,8 @@ type AuthPayload {
   user: User
 }
 
-
 type Vote {
-  id: ID! 
+  id: ID!
   user: User!
   link: Link!
 }
@@ -39,13 +38,16 @@ type Mutation {
   updateLink(id: ID!, url: String, description: String): Link
   deleteLink(id: ID!): Link
   login(email: String!, password: String!): AuthPayload
-  signUp(name: String!, email: String!, number: Int, password: String!): AuthPayload
-  vote(linkId: ID!) : Vote!
-
+  signUp(
+    name: String!
+    email: String!
+    number: Int
+    password: String!
+  ): AuthPayload
+  vote(linkId: ID!): Vote!
 }
 
-
-type Subscription{
+type Subscription {
   newLink: Link
   newVote: Vote
 }
