@@ -21,14 +21,16 @@ export default class CreateLink extends Component {
       }
     `;
     return (
-      <div>
+      <div className="flex flex-column mt3">
         <input
+          className="mb2"
           name="description"
           value={description}
           placeholder="description"
           onChange={(e) => this.setState({ description: e.target.value })}
         />
         <input
+          className="mb2"
           name="url"
           placeholder="url"
           value={url}

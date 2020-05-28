@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 //Third party Imports
 import { ApolloProvider } from "react-apollo";
@@ -22,12 +23,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-console.log(client);
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <Router>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Router>
   </ApolloProvider>,
   document.getElementById("root")
 );
