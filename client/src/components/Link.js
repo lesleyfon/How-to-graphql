@@ -4,8 +4,8 @@ class Link extends Component {
   render() {
     return (
       <div>
-        <h3>Link: {this.props.link.url}</h3>
-        <h5>Description: {this.props.link.description}</h5>
+        Link: {this.props.link.url}
+        Description: {this.props.link.description}
       </div>
     );
   }
