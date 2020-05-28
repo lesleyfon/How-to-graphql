@@ -5,6 +5,8 @@ import { Query } from "react-apollo";
 
 export default class LinkList extends Component {
   render() {
+    // Schema defination for querying data
+    // The gql function us used for parsing plain string into graphql code
     const FEED_QUERY = gql`
       {
         feed {
@@ -15,6 +17,7 @@ export default class LinkList extends Component {
       }
     `;
     return (
+      // The Query HOC is going to resolve the Query string above. it accepts a function which is where we are able to get infomation about graphql query
       <Query query={FEED_QUERY}>
         {({ data, loading, error }) => {
           if (loading) return <h1>Fetching Data</h1>;
