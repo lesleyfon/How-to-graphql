@@ -59,7 +59,9 @@ class Mutation {
     });
 
     if (vote)
-      throw new Error(`Link with the ID ${args.linkId} has already been voted on`);
+      throw new Error(
+        `Link with the ID ${args.linkId} has already been voted on`
+      );
 
     return context.prisma.createVote({
       link: { connect: { id: args.linkId } },
