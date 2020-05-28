@@ -14,7 +14,6 @@ class Header extends Component {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN);
 
-    console.log(authToken);
     return (
       <div className="flex pa1 justify-between nowrap orange">
         <div className="flex flex-fixed black">

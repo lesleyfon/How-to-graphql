@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import Link from "./Link";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import { AUTH_TOKEN } from "../constant";
 
 export default class LinkList extends Component {
+  componentDidMount() {
+    const token = localStorage.getItem(AUTH_TOKEN);
+    token ? this.props.history.push("/") : this.props.history.push("/login");
+  }
   render() {
     // Schema defination for querying data
     // The gql function us used for parsing plain string into graphql code

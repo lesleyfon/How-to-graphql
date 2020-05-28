@@ -103,7 +103,7 @@ export default class LogIn extends Component {
 
   _confirm = async (data) => {
     const {
-      login: { token, user },
+      login: { token },
     } = data;
     this._saveUserData(token);
     this.props.history.push("/");
