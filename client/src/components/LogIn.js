@@ -6,9 +6,9 @@ import { AUTH_TOKEN } from "./../constant";
 export default class LogIn extends Component {
   state = {
     login: true,
-    email: "master@prisma.io",
+    email: "",
     name: "",
-    password: "graphql",
+    password: "",
   };
   render() {
     const { email, password, login, name } = this.state;

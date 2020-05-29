@@ -11,6 +11,7 @@ function App() {
     <div className="ph3 pv1 background-gray">
       {" "}
       <Header />
+      <div className="divider" />
       <Route exact path="/" component={(props) => <LinkList {...props} />} />
       <Route
         exact

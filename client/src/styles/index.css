@@ -14,12 +14,18 @@ input {
 
 .orange {
   background-color: #ff6600;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  margin-bottom: 10px;
 }
 
 .background-gray {
   background-color: rgb(246, 246, 239);
 }
-
+.divider {
+  margin: 20px;
+}
 .f11 {
   font-size: 11px;
 }
@@ -40,4 +46,27 @@ input {
   border-color: buttonface;
   cursor: pointer;
   max-width: 250px;
+}
+
+.links {
+  border-bottom: 1px solid black;
+  padding: 10px 0px;
+}
+
+.links p {
+  font-size: larger;
+  padding: 0px;
+  margin: 0px;
+}
+
+.links a {
+  text-decoration: none;
+  color: rgba(25, 23, 17, 0.6);
+}
+
+.links a:hover {
+  text-decoration: underline;
+  color: rgba(12, 12, 12, 0.989);
+  transition: ease-in-out;
+  transition-duration: 0.9s;
 }
