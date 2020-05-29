@@ -4,7 +4,7 @@ const APP_SECRETE = "GraphQL-is-aw3some";
 const { getUserId } = require("../utils");
 
 class Mutation {
-  post(root, args, context) {
+  post(_, args, context) {
     const userId = getUserId(context);
 
     return context.prisma.createLink({
@@ -14,7 +14,13 @@ class Mutation {
     });
   }
 
-  async signUp(root, args, context) {
+  async signUp(_, args, context) {
+    console.log(args);
+
+    if (!args.password || !args.email || !args.name)
+      throw new Error(
+        "Please Provide an Email and Password and Name to Signup"
+      );
     const hashedPassword = await bcrypt.hash(args.password, 10);
 
     const { password, ...user } = await context.prisma.createUser({
