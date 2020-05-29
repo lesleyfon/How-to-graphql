@@ -70,3 +70,8 @@ input {
   transition: ease-in-out;
   transition-duration: 0.9s;
 }
+
+.error {
+  color: red;
+  font-style: italic;
+}

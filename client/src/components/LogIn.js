@@ -9,6 +9,10 @@ export default class LogIn extends Component {
     email: "",
     name: "",
     password: "",
+    error: {
+      status: false,
+      message: "",
+    },
   };
   render() {
     const { email, password, login, name } = this.state;
@@ -49,6 +53,9 @@ export default class LogIn extends Component {
     return (
       <div>
         <h4 className="mv3">{login ? "Login" : "Sign Up"}</h4>
+        {this.state.error && (
+          <span className="error">{this.state.error.message}</span>
+        )}
         <div className="flex flex-column">
           {!login && (
             <input
@@ -77,7 +84,19 @@ export default class LogIn extends Component {
             <Mutation
               mutation={login ? LOGIN_MUTATION : SINGUP_MUTATION}
               variables={{ name, email, password }}
-              onCompleted={(data) => this._confirm(data)}
+              onCompleted={(data) => {
+                this._confirm(data);
+              }}
+              onError={(error) => {
+                const message = error.message.split(":")[1];
+
+                this.setState({
+                  error: {
+                    status: !this.state.error.status,
+                    message: message,
+                  },
+                });
+              }}
             >
               {(mutation) => (
                 <div className="pointer mr2 button" onClick={mutation}>
