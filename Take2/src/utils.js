@@ -5,7 +5,6 @@ class Utils {
   getUserId(context) {
     const Auth = context.request.get("Authorization");
 
-    console.log("\n", Auth, "\n");
     if (Auth) {
       const token = Auth.replace("Bearer ", "");
       const { userId } = jwt.verify(token, APP_SECRETE);

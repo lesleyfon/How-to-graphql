@@ -31,13 +31,17 @@ class Mutation {
   }
 
   async login(root, args, context) {
-    const { password, ...user } = await context.prisma.user({
+    if (!args.password || !args.email)
+      throw new Error("Please Provide an email and password ");
+
+    const userdb = await context.prisma.user({
       email: args.email,
     });
 
-    if (!user) {
+    if (!userdb) {
       throw new Error("No Such User");
     }
+    const { password, ...user } = userdb;
     const valid = await bcrypt.compareSync(args.password, password);
 
     if (!valid) throw new Error("Invalid password");
