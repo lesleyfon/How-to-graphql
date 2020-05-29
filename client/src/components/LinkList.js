@@ -29,7 +29,10 @@ export default class LinkList extends Component {
           if (error) return <h1>GraphQL Error</h1>;
           const linkFeed = data.feed;
 
-          return linkFeed.map((link) => <Link link={link} key={link.id} />);
+          return linkFeed.map(
+            (link) =>
+              Boolean(link.description) && <Link link={link} key={link.id} />
+          );
         }}
       </Query>
     );
