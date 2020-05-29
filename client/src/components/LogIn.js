@@ -35,7 +35,7 @@ export default class LogIn extends Component {
         $number: Int
         $password: String!
       ) {
-        login(
+        signUp(
           name: $name
           email: $email
           number: $number
